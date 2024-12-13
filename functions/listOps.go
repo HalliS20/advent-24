@@ -13,18 +13,15 @@ func SplitList(list []string, seperator string) [][]string {
 	return newList
 }
 
-// this is correct
-// in go recursion is noticably less efficient than iteration
-func Reduce[T, U any](list []T, f func(T, U) U) U {
-	switch len(list) {
-	case 0:
-		panic("Too few elements to reduce")
-	case 1:
-		var zero U
-		return f(list[0], zero)
-	default:
-		return f(list[0], Reduce(list[1:], f))
+func longerList[T any](list1 []T, list2 []T) []T {
+	if len(list1) > len(list2) {
+		return list1
 	}
+	return list2
 }
 
-// MAKE A FUCKING MAP FUNCTION YOU INBRED CUNT
+func LongerListFirst[T any](list1 *[]T, list2 *[]T) {
+	temp := *list1
+	*list1 = *list2
+	*list2 = temp
+}
