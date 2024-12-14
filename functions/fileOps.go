@@ -3,6 +3,7 @@ package functions
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 func FileAsString(fileName string) string {
@@ -12,4 +13,11 @@ func FileAsString(fileName string) string {
 		panic(err)
 	}
 	return string(data)
+}
+
+func FileAsLines(fileName string) []string {
+	fileString := FileAsString(fileName)
+	strings.Split(fileString, "\n")
+	fileString = fileString[:len(fileString)-1]
+	return strings.Split(fileString, "\n")
 }
